@@ -1,0 +1,204 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout 
+  title="404 - Page Not Found | Got Yard? Landscape Construction"
+  description="Oops! The page you are looking for has been moved or doesn't exist. Explore our landscaping and hardscaping services or request a free quote."
+>
+  <Header />
+
+  <main class="page-404">
+    <section class="hero-404">
+      <div class="container">
+        <div class="content-404">
+          
+          <div class="badge-404">ERROR 404</div>
+
+          <h1 class="title-404">YARD NOT FOUND</h1>
+
+          <p class="subtitle-404">
+            Oops! It looks like you stumbled onto an unmapped trail. The page you are looking for may have been moved, renamed, or no longer exists.
+          </p>
+
+          <div class="actions-404">
+            <a href="/" class="btn btn-gold btn-lg">Return To Homepage</a>
+            <a href="tel:4256961427" class="btn btn-outline-light btn-lg">Call (425) 696-1427</a>
+          </div>
+
+          <!-- Quick Navigation Cards Grid -->
+          <div class="quick-links-container">
+            <h2 class="quick-links-title">Where Would You Like To Go?</h2>
+            
+            <div class="quick-links-grid">
+              <a href="/services/hardscaping" class="quick-card">
+                <h3>Paver Patios & Hardscaping</h3>
+                <p>Custom stone paver patios, fire pits & retaining walls.</p>
+              </a>
+
+              <a href="/services/landscape-design" class="quick-card">
+                <h3>3D Landscape Design</h3>
+                <p>Custom 3D rendering & softscape planning.</p>
+              </a>
+
+              <a href="/services/decks" class="quick-card">
+                <h3>Deck Building</h3>
+                <p>Composite decks, covered pergolas & cedar porches.</p>
+              </a>
+
+              <a href="/services/irrigation-system-installation" class="quick-card">
+                <h3>Irrigation & Sprinklers</h3>
+                <p>Smart controllers, lawn sprinklers & drip tubing.</p>
+              </a>
+
+              <a href="/paver-patios" class="quick-card">
+                <h3>Google Ads Special Offer</h3>
+                <p>High-durability interlocking stone paver patio builds.</p>
+              </a>
+
+              <a href="/gallery" class="quick-card">
+                <h3>Project Gallery</h3>
+                <p>Browse photos of our real Pacific Northwest projects.</p>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+.page-404 {
+  padding-top: 120px;
+  background-color: var(--clr-bg-dark);
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hero-404 {
+  padding: 60px 0 90px 0;
+  text-align: center;
+}
+
+.content-404 {
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.badge-404 {
+  display: inline-block;
+  background: var(--clr-accent-gold);
+  color: #000000;
+  font-weight: 800;
+  padding: 6px 16px;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  border: 2px solid #000000;
+  box-shadow: 3px 4px 0px 0px #000000;
+}
+
+.title-404 {
+  font-family: var(--font-heading);
+  font-size: 4.2rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 768px) {
+  .title-404 {
+    font-size: 2.8rem;
+  }
+}
+
+.subtitle-404 {
+  font-size: 1.15rem;
+  color: var(--clr-text-muted);
+  line-height: 1.65;
+  margin-bottom: 32px;
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.actions-404 {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+
+.quick-links-container {
+  padding-top: 40px;
+  border-top: 1px solid var(--clr-border);
+}
+
+.quick-links-title {
+  font-family: var(--font-heading);
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin-bottom: 28px;
+  text-transform: uppercase;
+}
+
+.quick-links-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  text-align: left;
+}
+
+@media (max-width: 992px) {
+  .quick-links-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .quick-links-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.quick-card {
+  background: var(--clr-bg-card);
+  border: 2px solid #000000;
+  box-shadow: 3px 4px 0px 0px #000000;
+  padding: 20px;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.quick-card:hover {
+  transform: translateY(-4px);
+  border-color: #89e44d;
+}
+
+.quick-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  color: #ffffff;
+  margin: 0 0 8px 0;
+  text-transform: uppercase;
+}
+
+.quick-card p {
+  font-size: 0.88rem;
+  color: var(--clr-text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+</style>
