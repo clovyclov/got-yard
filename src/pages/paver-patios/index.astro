@@ -1,0 +1,604 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import Reviews from '../../components/Reviews.astro';
+import Process from '../../components/Process.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import Footer from '../../components/Footer.astro';
+
+const patioFaqs = [
+  {
+    question: "How much does a custom paver patio cost in Snohomish County?",
+    answer: "Paver patio costs depend on square footage, site excavation requirements, paver material selection, and custom features like fire pits or seating walls. Most residential paver patio projects range from $18 to $32 per square foot installed. Got Yard provides 100% free, itemized on-site consultations!"
+  },
+  {
+    question: "Why are paver patios better than poured concrete in Washington?",
+    answer: "Pacific Northwest rain and winter freeze-thaw cycles cause poured concrete to crack and discolor over time. Interlocking pavers have a compressive strength of over 8,000 PSI and flex naturally with ground shifts without cracking. Plus, individual pavers can be easily replaced if needed!"
+  },
+  {
+    question: "How long does a paver patio installation take?",
+    answer: "Most standard residential paver patio installations (300 to 700 sq ft) take 3 to 5 business days from initial site excavation to final polymeric joint sand compaction."
+  },
+  {
+    question: "Do paver patios get weeds growing between the stones?",
+    answer: "No! We sweep polymeric joint sand between all paver seams and activate it with water, which hardens like flexible cement. This seals out weed seeds, prevents ant burrowing, and locks the pavers tightly together."
+  },
+  {
+    question: "Do I need a permit for a paver patio in Marysville or Snohomish County?",
+    answer: "Ground-level paver patios generally do not require a building permit in Snohomish County unless they involve significant retaining walls over 4 feet or cover property setbacks. Got Yard handles all local code checks and HOA submittal paperwork for you."
+  }
+];
+
+const patioSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Custom Paver Patio Installation",
+  "serviceType": "Hardscaping & Paver Patios",
+  "provider": {
+    "@type": "LandscapingAndGardeningService",
+    "name": "Got Yard? Landscape Construction",
+    "telephone": "+14256961427",
+    "image": "https://gotyardlandscape.com/assets/logo-light.webp"
+  },
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Snohomish County, WA"
+  },
+  "description": "High-durability interlocking paver patio installation in Marysville & Snohomish County, WA. Built-in fire pits, seating walls, and 6-inch zero-settling gravel base."
+};
+---
+
+<Layout
+  title="Custom Paver Patio Installation Marysville & Snohomish County | Got Yard?"
+  description="Transform your yard with custom paver patio construction in Marysville & Snohomish County, WA. Interlocking stone pavers, fire pits, 6-inch compacted base & free estimates!"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(patioSchema)} />
+
+  <Header />
+
+  <!-- Google Ads Conversion Hero Section -->
+  <section class="lp-hero">
+    <div class="container">
+      <div class="lp-hero-grid">
+        
+        <!-- Left Column: High-Converting Headline & Bullet Points -->
+        <div class="lp-hero-text">
+          <div class="lp-location-badge">
+            <span class="pulse-dot"></span> Serving Marysville, Everett, Lake Stevens, Snohomish & All Snohomish County
+          </div>
+
+          <h1 class="lp-hero-heading">
+            Custom Paver Patio Installation <span class="text-highlight">Built To Last A Lifetime</span>
+          </h1>
+
+          <p class="lp-hero-sub">
+            Upgrade your outdoor living space with premium interlocking stone pavers, built-in fire tables, and seat walls. Engineered over a 6-inch compacted gravel base built to withstand wet Pacific Northwest winters without settling or cracking.
+          </p>
+
+          <ul class="lp-trust-bullets">
+            <li><span class="bullet-icon">✓</span> <strong>6-Inch Zero-Settling Gravel Base Guarantee</strong></li>
+            <li><span class="bullet-icon">✓</span> <strong>Polymeric Sand Joint Sealing (No Weed Growth)</strong></li>
+            <li><span class="bullet-icon">✓</span> <strong>Free On-Site 3D Design & Itemized Estimate</strong></li>
+            <li><span class="bullet-icon">✓</span> <strong>Licensed, Bonded & Insured (GOTYA**801L3)</strong></li>
+          </ul>
+
+          <div class="lp-hero-ctas">
+            <a href="tel:4256961427" class="btn btn-gold btn-lg">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.27c1.21.49 2.53.76 3.88.76a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.27 2.67.76 3.88a1 1 0 01-.27 1.11l-2.37 2.4z"/></svg>
+              Click To Call (425) 696-1427
+            </a>
+          </div>
+
+          <!-- Proof Badges Strip -->
+          <div class="lp-proof-strip">
+            <div class="proof-item">
+              <span class="stars">★★★★★</span>
+              <span class="proof-label">5.0 Rating on Google</span>
+            </div>
+            <div class="proof-divider">|</div>
+            <div class="proof-item">
+              <span class="proof-bold">10-Year</span>
+              <span class="proof-label">Structural Guarantee</span>
+            </div>
+            <div class="proof-divider">|</div>
+            <div class="proof-item">
+              <span class="proof-bold">100% Free</span>
+              <span class="proof-label">On-Site Consultation</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Above-The-Fold Lead Capture Form -->
+        <div class="lp-hero-form-wrapper">
+          <QuoteForm 
+            title="Request Free Paver Patio Estimate"
+            subtitle="Response guaranteed within 2-4 hours. Fast, itemized quote!"
+            buttonText="Get Free Patio Quote"
+          />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Visual Proof Showcase Grid -->
+  <section class="lp-showcase-section">
+    <div class="container">
+      <div class="section-center-head">
+        <span class="section-eyebrow">Real Northwest Projects</span>
+        <h2 class="section-title">Custom Paver Patio Styles & Features</h2>
+        <p class="section-desc">Designed and built by Got Yard to transform unused grass into low-maintenance outdoor living spaces.</p>
+      </div>
+
+      <div class="showcase-grid">
+        <div class="showcase-card">
+          <div class="showcase-img-wrap">
+            <img src="/assets/paver-patio-construction.webp" alt="Interlocking Stone Paver Patio with Seating Wall" />
+          </div>
+          <div class="showcase-body">
+            <h3>Interlocking Stone Paver Patios</h3>
+            <p>High-density concrete pavers in modern slate, charcoal, and natural tan textures. Engineered for heavy patio furniture, BBQ grills, and foot traffic.</p>
+          </div>
+        </div>
+
+        <div class="showcase-card">
+          <div class="showcase-img-wrap">
+            <img src="/assets/fireplace-patio.webp" alt="Paver Patio with Built-In Fire Pit Center" />
+          </div>
+          <div class="showcase-body">
+            <h3>Built-In Fire Pits & Fireplaces</h3>
+            <p>Extend your outdoor season into chilly Pacific Northwest evenings with custom stone fire pits and wood or gas fire tables built into your patio design.</p>
+          </div>
+        </div>
+
+        <div class="showcase-card">
+          <div class="showcase-img-wrap">
+            <img src="/assets/paver-walkway-path.webp" alt="Custom Paver Walkway and Border Path" />
+          </div>
+          <div class="showcase-body">
+            <h3>Paver Walkways & Retaining Walls</h3>
+            <p>Seamlessly connect your driveway, front entryway, and back patio with matching stone walkways and terraced block retaining walls.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Comparison Matrix: Pavers vs Poured Concrete -->
+  <section class="lp-comparison-section">
+    <div class="container">
+      <div class="section-center-head">
+        <span class="section-eyebrow">Smart Investment</span>
+        <h2 class="section-title">Why Paver Patios Outperform Poured Concrete</h2>
+        <p class="section-desc">Poured concrete cracks under Northwest rain and freeze cycles. Here is why interlocking pavers are the superior choice:</p>
+      </div>
+
+      <div class="table-responsive">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th>Feature / Specification</th>
+              <th class="col-pavers">Got Yard Paver Patios</th>
+              <th class="col-concrete">Poured Slab Concrete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Compressive Strength</strong></td>
+              <td class="col-pavers"><strong>8,000+ PSI</strong> (Industrial Strength)</td>
+              <td class="col-concrete">3,000 - 4,000 PSI</td>
+            </tr>
+            <tr>
+              <td><strong>Pacific Northwest Climate Durability</strong></td>
+              <td class="col-pavers">✔ Flexes naturally with freeze-thaw ground shifts without cracking</td>
+              <td class="col-concrete">✖ Cracks, scales, and discolors under rain & frost</td>
+            </tr>
+            <tr>
+              <td><strong>Repairability</strong></td>
+              <td class="col-pavers">✔ Individual pavers can be removed & replaced in minutes</td>
+              <td class="col-concrete">✖ Requires jackhammering, ugly patch seams, or replacement</td>
+            </tr>
+            <tr>
+              <td><strong>Weed & Insect Control</strong></td>
+              <td class="col-pavers">✔ Polymeric sand joint seal hardens like flexible cement</td>
+              <td class="col-concrete">✖ Weeds grow through expansion joint cracks</td>
+            </tr>
+            <tr>
+              <td><strong>Expected Lifespan</strong></td>
+              <td class="col-pavers"><strong>30+ Years to Lifetime</strong></td>
+              <td class="col-concrete">10 - 15 Years</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Steps -->
+  <Process />
+
+  <!-- Testimonials & Reviews -->
+  <Reviews />
+
+  <!-- FAQ Section -->
+  <FaqAccordion faqs={patioFaqs} />
+
+  <!-- Bottom High-Converting CTA Banner -->
+  <section class="lp-cta-banner">
+    <div class="container">
+      <div class="cta-banner-card">
+        <h2>Ready To Transform Your Yard With A Custom Paver Patio?</h2>
+        <p>Get a 100% free on-site consultation and itemized estimate from Got Yard? Landscape Construction.</p>
+        <div class="cta-banner-actions">
+          <a href="tel:4256961427" class="btn btn-gold btn-lg">Call (425) 696-1427 Now</a>
+          <a href="#services" class="btn btn-outline-light js-open-quote-modal">Request Free Quote</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Sticky Mobile Action Bar -->
+  <div class="sticky-mobile-bar">
+    <a href="tel:4256961427" class="sticky-btn sticky-call">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.27c1.21.49 2.53.76 3.88.76a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.27 2.67.76 3.88a1 1 0 01-.27 1.11l-2.37 2.4z"/></svg>
+      Call (425) 696-1427
+    </a>
+    <button type="button" class="sticky-btn sticky-quote js-open-quote-modal">
+      Get Free Quote
+    </button>
+  </div>
+
+</Layout>
+
+<style>
+/* Landing Page Hero */
+.lp-hero {
+  padding-top: 130px;
+  padding-bottom: 70px;
+  background: linear-gradient(180deg, rgba(16, 19, 17, 0.88) 0%, rgba(16, 19, 17, 0.98) 100%),
+              url('/assets/paver-patio-construction.webp') center/cover no-repeat;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.lp-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 44px;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .lp-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+.lp-location-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(137, 228, 77, 0.12);
+  border: 1.5px solid #89e44d;
+  color: #89e44d;
+  font-size: 0.88rem;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 50px;
+  margin-bottom: 16px;
+}
+
+.pulse-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #89e44d;
+  border-radius: 50%;
+  box-shadow: 0 0 0 0 rgba(137, 228, 77, 0.7);
+  animation: pulse 1.6s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(137, 228, 77, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(137, 228, 77, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(137, 228, 77, 0); }
+}
+
+.lp-hero-heading {
+  font-family: var(--font-heading);
+  font-size: 3.4rem;
+  font-weight: 700;
+  line-height: 1.06;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 18px;
+  letter-spacing: 0.5px;
+}
+
+.text-highlight {
+  color: var(--clr-accent-gold, #e5a93c);
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .lp-hero-heading {
+    font-size: 2.3rem;
+  }
+}
+
+.lp-hero-sub {
+  font-size: 1.08rem;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+
+.lp-trust-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lp-trust-bullets li {
+  font-size: 1.02rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bullet-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: #89e44d;
+  color: #000000;
+  border-radius: 50%;
+  font-weight: 900;
+  font-size: 0.8rem;
+}
+
+.lp-hero-ctas {
+  margin-bottom: 28px;
+}
+
+.btn-lg {
+  padding: 16px 28px;
+  font-size: 1.15rem;
+}
+
+.lp-proof-strip {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  flex-wrap: wrap;
+}
+
+.proof-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stars {
+  color: #ffc107;
+  font-size: 1rem;
+}
+
+.proof-bold {
+  font-weight: 800;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.proof-label {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.proof-divider {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 1.2rem;
+}
+
+/* Showcase Section */
+.lp-showcase-section {
+  padding: 90px 0;
+  background-color: var(--clr-bg-dark);
+}
+
+.section-center-head {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 48px auto;
+}
+
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+@media (max-width: 992px) {
+  .showcase-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.showcase-card {
+  background: var(--clr-bg-card);
+  border: 2.5px solid #000000;
+  box-shadow: 4px 6px 0px 0px #000000;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.showcase-img-wrap {
+  height: 230px;
+  overflow: hidden;
+}
+
+.showcase-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.showcase-body {
+  padding: 24px;
+}
+
+.showcase-body h3 {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+}
+
+.showcase-body p {
+  font-size: 0.95rem;
+  color: var(--clr-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Comparison Matrix Section */
+.lp-comparison-section {
+  padding: 90px 0;
+  background-color: var(--clr-bg-main);
+  border-top: 1px solid var(--clr-border);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--clr-bg-card);
+  border: 2.5px solid #000000;
+  box-shadow: 6px 8px 0px 0px #000000;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 18px 24px;
+  text-align: left;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.comparison-table th {
+  background: #151a16;
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+
+.col-pavers {
+  background: rgba(137, 228, 77, 0.08);
+  color: #ffffff;
+}
+
+.col-concrete {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* CTA Banner */
+.lp-cta-banner {
+  padding: 80px 0;
+  background-color: var(--clr-bg-dark);
+}
+
+.cta-banner-card {
+  background: linear-gradient(135deg, #1d2520 0%, #121713 100%);
+  border: 2.5px solid #000000;
+  box-shadow: 6px 8px 0px 0px #000000;
+  border-radius: 16px;
+  padding: 48px;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cta-banner-card h2 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.cta-banner-card p {
+  font-size: 1.1rem;
+  color: var(--clr-text-muted);
+  margin-bottom: 28px;
+}
+
+.cta-banner-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Sticky Mobile Action Bar */
+.sticky-mobile-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: #111512;
+  border-top: 2px solid #000000;
+  padding: 10px 14px;
+  gap: 10px;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+  .sticky-mobile-bar {
+    display: flex;
+  }
+}
+
+.sticky-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 10px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 1.5px solid #000000;
+}
+
+.sticky-call {
+  background: var(--clr-accent-gold);
+  color: #000000;
+}
+
+.sticky-quote {
+  background: #89e44d;
+  color: #000000;
+  cursor: pointer;
+}
+</style>
