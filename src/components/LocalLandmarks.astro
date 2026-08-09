@@ -1,0 +1,153 @@
+---
+interface Landmark {
+  name: string;
+  desc: string;
+}
+
+interface Props {
+  cityName: string;
+  state: string;
+  tagline?: string;
+  landmarks?: Landmark[];
+  neighborhoods?: string[];
+}
+
+const {
+  cityName = "Arlington",
+  state = "WA",
+  tagline = "Trusted Landscape Construction & Excavation Across Arlington",
+  landmarks = [
+    { name: "Centennial Trail Corridor", desc: "Custom patio and deck installations built for homes surrounding the trail, designed for Pacific Northwest weather." },
+    { name: "Gleneagle & High Bridge", desc: "Full-scale hardscaping, retaining walls, and sod installation for established residential properties." },
+    { name: "Stillaguamish River Basin", desc: "Expert yard grading, drainage solutions, and erosion control engineered for Pacific Northwest rainfall." },
+    { name: "Smokey Point & Bryant", desc: "Heavy land clearing, excavation, and structural outdoor living spaces built with precision." }
+  ],
+  neighborhoods = ["Gleneagle", "Smokey Point", "Haller Park", "Bryant", "High Bridge", "Portage Creek", "Silvana", "Island Crossing"]
+} = Astro.props;
+---
+
+<section class="local-landmarks-section">
+  <div class="container">
+    <div class="landmarks-header">
+      <span class="section-eyebrow">Local Experience Matters</span>
+      <h2 class="section-title">Serving Homeowners Throughout {cityName}, {state}</h2>
+      <p class="section-desc">{tagline}. We understand the soil conditions, heavy rainfall, and local slopes unique to the {cityName} area.</p>
+    </div>
+
+    <div class="landmarks-grid">
+      {landmarks.map(item => (
+        <div class="landmark-card">
+          <div class="landmark-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e5a93c" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+          </div>
+          <h3 class="landmark-title">{item.name}</h3>
+          <p class="landmark-desc">{item.desc}</p>
+        </div>
+      ))}
+    </div>
+
+    <div class="neighborhoods-bar">
+      <h4 class="neighborhoods-title">{cityName} Neighborhoods & Surrounding Communities We Serve:</h4>
+      <div class="neighborhood-chips">
+        {neighborhoods.map(n => (
+          <span class="chip">✔ {n}, {state}</span>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.local-landmarks-section {
+  padding: 90px 0;
+  background-color: var(--clr-bg-dark);
+  text-align: center;
+  border-top: 1px solid var(--clr-border);
+}
+
+.landmarks-grid {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin-bottom: 48px;
+}
+
+.landmark-card {
+  flex: 1 1 240px;
+  max-width: 285px;
+  background: var(--clr-bg-card);
+  border: 1px solid var(--clr-border);
+  padding: 28px 20px;
+  border-radius: var(--radius-md);
+  text-align: left;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+@media (max-width: 640px) {
+  .landmark-card {
+    max-width: 100%;
+  }
+}
+
+.landmark-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--clr-accent-gold);
+}
+
+.landmark-icon {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.landmark-title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--clr-text-main);
+  margin-bottom: 8px;
+}
+
+.landmark-desc {
+  font-size: 0.95rem;
+  color: var(--clr-text-muted);
+  line-height: 1.6;
+}
+
+.neighborhoods-bar {
+  background: var(--clr-bg-surface);
+  border: 1px solid var(--clr-border);
+  padding: 28px 32px;
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.neighborhoods-title {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  color: var(--clr-accent-gold);
+  margin-bottom: 16px;
+  letter-spacing: 0.5px;
+}
+
+.neighborhood-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.chip {
+  background: #ffffff;
+  border: 2px solid #000000;
+  box-shadow: 3px 4px 0px 0px #000000;
+  color: #000000;
+  padding: 8px 16px;
+  border-radius: 0px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+</style>

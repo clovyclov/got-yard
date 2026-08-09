@@ -1,0 +1,42 @@
+---
+const galleryItems = [
+  { category: "hardscaping", image: "/assets/3109C95B-6E8B-4255-9C4A-04ECA2D9E075.webp", alt: "Custom Paver Patio & Outdoor Living Space" },
+  { category: "decks", image: "/assets/623CF190-7319-4F5A-9E58-AC06F10AD535.webp", alt: "Composite Deck Building & Custom Railing" },
+  { category: "hardscaping", image: "/assets/35404C40-991F-444A-85E2-0CFC8F9484AF.webp", alt: "Terraced Retaining Wall & Slope Terracing" },
+  { category: "landscaping", image: "/assets/IMG_1338.webp", alt: "Yard Drainage & Fresh Sod Replacement" },
+  { category: "hardscaping", image: "/assets/E91E8AA7-31CF-49BC-8AC9-25CBCDBEC608.webp", alt: "Outdoor Fireplace & Paver Patio Surround" },
+  { category: "decks", image: "/assets/C8804C51-CDF0-4FB9-968E-28B306356A79.webp", alt: "Multi-Tier Lakeview Deck Construction" },
+  { category: "hardscaping", image: "/assets/5846597F-A577-4BAF-AC83-E61DD2763FD0.webp", alt: "Block Retaining Wall & Drainage System" },
+  { category: "decks", image: "/assets/E02C06A6-230C-4116-9F1A-E4EDFE93481A.webp", alt: "Custom Outdoor Deck & Covered Porch" }
+];
+---
+
+<section class="gallery-section" id="gallery">
+  <div class="container">
+    <span class="section-eyebrow">Our Work</span>
+    <h2 class="section-title">Project Gallery</h2>
+    <p class="section-desc">Explore recent landscape transformations, deck builds, and hardscaping projects across Marysville & Snohomish County.</p>
+
+    <div class="gallery-grid">
+      {galleryItems.map(item => (
+        <div class="gallery-item" data-category={item.category}>
+          <img src={item.image} alt={item.alt} loading="lazy" />
+          <div class="gallery-item-overlay">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#e5a93c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <button type="button" class="btn btn-primary js-open-quote-modal">Start Your Project</button>
+  </div>
+</section>
+
+<!-- Lightbox Modal -->
+<div class="lightbox-modal" id="lightboxModal">
+  <span class="lightbox-close" id="lightboxClose">&times;</span>
+  <img src="" alt="Enlarged Project View" class="lightbox-img" id="lightboxImg" />
+</div>

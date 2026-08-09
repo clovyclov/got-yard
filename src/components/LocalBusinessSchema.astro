@@ -1,0 +1,127 @@
+---
+interface Props {
+  cityName?: string;
+}
+
+const { cityName = "Marysville" } = Astro.props;
+
+const businessSchema = {
+  "@context": "https://schema.org",
+  "@type": ["LandscapingAndGardeningService", "HomeAndConstructionBusiness"],
+  "@id": "https://gotyardlandscape.com/#organization",
+  "name": "Got Yard? Landscape Construction",
+  "alternateName": "Got Yard Landscape",
+  "url": "https://gotyardlandscape.com",
+  "logo": "https://gotyardlandscape.com/assets/logo-main.webp",
+  "image": "https://gotyardlandscape.com/assets/3109C95B-6E8B-4255-9C4A-04ECA2D9E075.webp",
+  "telephone": "+14256961427",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Marysville",
+    "addressRegion": "WA",
+    "postalCode": "98270",
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 48.0518,
+    "longitude": -122.1771
+  },
+  "areaServed": [
+    { "@type": "City", "name": "Marysville", "sameAs": "https://en.wikipedia.org/wiki/Marysville,_Washington" },
+    { "@type": "City", "name": "Arlington", "sameAs": "https://en.wikipedia.org/wiki/Arlington,_Washington" },
+    { "@type": "City", "name": "Everett", "sameAs": "https://en.wikipedia.org/wiki/Everett,_Washington" },
+    { "@type": "City", "name": "Lake Stevens", "sameAs": "https://en.wikipedia.org/wiki/Lake_Stevens,_Washington" },
+    { "@type": "City", "name": "Stanwood", "sameAs": "https://en.wikipedia.org/wiki/Stanwood,_Washington" },
+    { "@type": "City", "name": "Snohomish", "sameAs": "https://en.wikipedia.org/wiki/Snohomish,_Washington" }
+  ],
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "07:00",
+      "closes": "18:00"
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "10",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "David Kiesell" },
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "reviewBody": "What an awesome group of guys! Friendly, accommodating and very skilled. They did excellent work down to every detail."
+    },
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "Kris Groeneveld" },
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "reviewBody": "Rylan was super knowledgeable and helpful throughout the entire process. We are super happy with the end result of our new gravel driveway."
+    },
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "Tricia" },
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "reviewBody": "Rylan and his Got Yard team were very courteous and did a great job on my hardscape."
+    },
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "Greta van Dyck Weiler" },
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "reviewBody": "Rylan and his Got Yard? crew are absolutely the best! From conception to design to execution Rylan was responsive, professional, personable, and knowledgeable."
+    },
+    {
+      "@type": "Review",
+      "author": { "@type": "Person", "name": "Denise Young" },
+      "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+      "reviewBody": "Rylan and Pascaul at Got Yard took great care of lawn needs and were a pleasure to do business with."
+    }
+  ],
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Landscape Construction & Hardscaping Services",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Paver Patio Construction",
+          "description": "Custom paver patio installation using Belgard, Mutual Materials, and natural stone pavers."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Composite & Timber Deck Building",
+          "description": "Custom multi-tier deck construction using Trex, TimberTech, and cedar materials."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Retaining Wall Construction",
+          "description": "Structural block and natural stone retaining walls for slope stabilization and terracing."
+        }
+      },
+      {
+        "@type": "Offer",
+        "itemOffered": {
+          "@type": "Service",
+          "name": "Yard Drainage & French Drains",
+          "description": "French drain systems, catch basins, and regrading to eliminate standing water."
+        }
+      }
+    ]
+  }
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(businessSchema)} />

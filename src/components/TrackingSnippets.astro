@@ -1,0 +1,63 @@
+---
+interface Props {
+  bingUetTagId?: string;
+  gtmContainerId?: string;
+  ga4MeasurementId?: string;
+  clarityProjectId?: string;
+}
+
+const {
+  bingUetTagId = "", // Managed via GTM-KCLD4F8D container to prevent duplicate tag firing
+  gtmContainerId = "GTM-KCLD4F8D", // Primary Got Yard GTM Container
+  ga4MeasurementId = "", // Optional direct GA4 override if not in GTM
+  clarityProjectId = "" // Optional direct Clarity override if not in GTM
+} = Astro.props;
+---
+
+<!-- 1. Google Tag Manager (GTM) Container - Primary Tag Manager -->
+{gtmContainerId && (
+  <script is:inline define:vars={{ containerId: gtmContainerId }}>
+    (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer',containerId);
+  </script>
+)}
+
+<!-- 2. Microsoft Advertising (Bing Ads) Direct UET Tag (Fallback) -->
+{bingUetTagId && (
+  <script is:inline define:vars={{ tagId: bingUetTagId }}>
+    (function(w,d,t,r,u){var f,n,i;w[u]=w[u]||[],f=function(){var o={ti:tagId, enableAutoSpa:true};o.q=w[u],w[u]=new UET(o),w[u].push("pageLoad")},n=d.createElement(t),n.src=r,n.async=1,n.onload=n.onreadystatechange=function(){var s=this.readyState;s&&"loaded"!==s&&"complete"!==s||(f(),n.onload=n.onreadystatechange=null)},i=d.getElementsByTagName(t)[0],i.parentNode.insertBefore(n,i)})(window,document,"script","//bat.bing.com/bat.js","uetq");
+  </script>
+)}
+
+<!-- 3. Google Analytics 4 (GA4) Direct Tag (Fallback) -->
+{ga4MeasurementId && (
+  <>
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${ga4MeasurementId}`}></script>
+    <script is:inline define:vars={{ gaId: ga4MeasurementId }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', gaId);
+    </script>
+  </>
+)}
+
+<!-- 4. Microsoft Clarity Direct Tag (Fallback) -->
+{clarityProjectId && (
+  <script is:inline define:vars={{ projectId: clarityProjectId }}>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", projectId);
+  </script>
+)}
+
+<!-- Global DataLayer Initializer -->
+<script is:inline>
+  window.dataLayer = window.dataLayer || [];
+  window.uetq = window.uetq || [];
+</script>

@@ -1,0 +1,281 @@
+---
+const reviews = [
+  {
+    name: "David Kiesell",
+    meta: "Google Verified Review • Patio Paving",
+    tag: "Patio Paving",
+    text: "What an awesome group of guys! Friendly, accommodating and very skilled. They did excellent work down to every detail. They completed the job in less time than quoted. Just another bonus. We will love our patio for years to come. Highly recommend 👌 Thank you so much!! Great job!"
+  },
+  {
+    name: "Kris Groeneveld",
+    meta: "Google Verified Review • Gravel Driveway & Yard Expansion",
+    tag: "Gravel Driveway & Yard Space",
+    text: "Rylan was super knowledgeable and helpful throughout the entire process and gave some great ideas for future yard projects as well. We are super happy with the end result of our new gravel driveway and expanded yard space. Will definitely be back for future yard projects. Thanks!"
+  },
+  {
+    name: "Tricia",
+    meta: "Google Verified Review • Hardscape Installation",
+    tag: "Custom Hardscaping",
+    text: "Rylan and his Got Yard team were very courteous and did a great job on my hardscape. Rylan worked closely with me to ensure he and his team understood my vision for the project from beginning to end. Rylan explained and answered my questions and checked in as the project progressed. I went with Rylan due to his friendliness, communication, reasonable quote and willingness to work with me and my design plan so I could feel confident that I would get a good result. Rylan made sure I was happy with the outcome, and I am. Give Got Yard a call for your project!"
+  },
+  {
+    name: "Greta van Dyck Weiler",
+    meta: "Google Verified Review • Full Yard Landscape",
+    tag: "Full Yard Design",
+    text: "Rylan and his Got Yard? crew are absolutely the best! From conception to design to execution Rylan was responsive, professional, personable, and knowledgeable. He listened to what we wanted and brought our vision for a grass-free yard to life. We couldn't be happier with Rylan and the crew who worked on our yard. They were just as excited with the results as we were (rightly so!), and we look forward to continuing with Got Yard? for phase 2. I highly recommend them for all of your landscaping needs. A hard working and dedicated crew!"
+  },
+  {
+    name: "Denise Young",
+    meta: "Google Local Guide • Lawn Care & Maintenance",
+    tag: "Lawn Care & Service",
+    text: "Rylan and Pascaul at Got Yard took great care of lawn needs and were a pleasure to do business with."
+  },
+  {
+    name: "Kristen Sparks",
+    meta: "Google Verified Review • Gravel & Drainage",
+    tag: "Gravel & Drainage",
+    text: "Rylan and his crew did a magnificent job laying down new gravel to improve drainage and create a parking pad. I needed a quick turnaround and they came through! I couldn't be happier and will recommend to all and definitely hire them again."
+  },
+  {
+    name: "Colton Rush",
+    meta: "Google Verified Review • Quality & Honest Work",
+    tag: "Landscape Construction",
+    text: "Great company, does quality and honest work."
+  },
+  {
+    name: "Greg Johnston",
+    meta: "Google Local Guide • Hardscaping & Prep",
+    tag: "Yard Overhaul",
+    text: "Hard working! Did a Great job! Will have them back soon?"
+  },
+  {
+    name: "Alex -",
+    meta: "Google Verified Review • Gravel Pad Build",
+    tag: "Gravel Pad Construction",
+    text: "Great attention to detail and the quality of work on the gravel pad was superb! Abel did a good job of listening and accommodating the materials and scope that we wanted done."
+  },
+  {
+    name: "Abe Abera",
+    meta: "Google Verified Review • Lawn & Yard Prep",
+    tag: "Yard Cleanup & Prep",
+    text: "Was prompt in his response & cleared all overgrown shrubs, weeds, edged my lawn, and prepped my yard for a great summer."
+  }
+];
+
+// Schema.org Review & AggregateRating JSON-LD
+const reviewSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Got Yard? Landscape Construction",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "10",
+    "bestRating": "5"
+  },
+  "review": reviews.map(r => ({
+    "@type": "Review",
+    "author": { "@type": "Person", "name": r.name },
+    "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+    "reviewBody": r.text
+  }))
+};
+---
+
+<section class="testimonials-section" id="reviews">
+  <script type="application/ld+json" set:html={JSON.stringify(reviewSchema)} />
+
+  <div class="container">
+    <span class="section-eyebrow">Google Business Profile Reviews</span>
+    <h2 class="section-title">What Our Clients Say</h2>
+    <p class="section-desc">Read verified 5-star reviews from real homeowners across Marysville and Snohomish County who trust Got Yard for hardscaping, patios, drainage, and complete yard overhauls.</p>
+
+    <!-- Reviews Slider / Carousel Container -->
+    <div class="reviews-carousel-wrapper">
+      
+      <!-- Prev & Next Controls -->
+      <button class="carousel-nav-btn carousel-prev" id="carouselPrev" aria-label="Previous Review">❮</button>
+      <button class="carousel-nav-btn carousel-next" id="carouselNext" aria-label="Next Review">❯</button>
+
+      <!-- Sliding Track -->
+      <div class="reviews-track-container">
+        <div class="reviews-track" id="reviewsTrack">
+          {reviews.map(rev => (
+            <div class="review-slide">
+              <div class="review-card">
+                <div class="review-card-header">
+                  <div class="reviewer-info">
+                    <span class="reviewer-name">{rev.name}</span>
+                    <span class="reviewer-meta">{rev.meta}</span>
+                  </div>
+                  <div class="rating-stars">★★★★★</div>
+                </div>
+                
+                <div class="review-service-badge">{rev.tag}</div>
+
+                <p class="review-card-body">"{rev.text}"</p>
+                
+                <div class="review-card-footer">
+                  <span class="gbp-badge">✔ Verified Google Review</span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+<style>
+.testimonials-section {
+  padding: 90px 0;
+  background-color: var(--clr-bg-dark);
+  text-align: center;
+  border-top: 1px solid var(--clr-border);
+}
+
+.reviews-carousel-wrapper {
+  position: relative;
+  max-width: 1040px;
+  margin: 48px auto 0 auto;
+  padding: 0 54px;
+}
+
+.reviews-track-container {
+  overflow: hidden;
+  width: 100%;
+}
+
+.reviews-track {
+  display: flex;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  width: 100%;
+}
+
+.review-slide {
+  min-width: 100%;
+  flex: 0 0 100%;
+  box-sizing: border-box;
+  padding: 8px 12px;
+}
+
+.review-card {
+  background: var(--clr-bg-card);
+  border: 2px solid #000000;
+  box-shadow: 4px 6px 0px 0px #000000;
+  padding: 36px 32px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 260px;
+}
+
+.review-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.reviewer-name {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--clr-text-main);
+  line-height: 1.2;
+}
+
+.reviewer-meta {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--clr-text-muted);
+  margin-top: 4px;
+}
+
+.rating-stars {
+  color: #e5a93c;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+}
+
+.review-service-badge {
+  display: inline-block;
+  align-self: flex-start;
+  background: #ffffff;
+  border: 1px solid #000000;
+  box-shadow: 2px 2px 0px 0px #000000;
+  color: #000000;
+  padding: 4px 12px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.review-card-body {
+  font-size: 1.05rem;
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.review-card-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 14px;
+}
+
+.gbp-badge {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--clr-accent-gold);
+}
+
+/* Slider Arrow Controls */
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 48px;
+  height: 48px;
+  background: #89e44d;
+  border: 2px solid #000000;
+  box-shadow: 3px 4px 0px 0px #000000;
+  color: #000000;
+  font-size: 1.2rem;
+  font-weight: 900;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.carousel-nav-btn:hover {
+  background: #e5a93c;
+  transform: translateY(-50%) scale(1.08);
+}
+
+.carousel-prev {
+  left: 0;
+}
+
+.carousel-next {
+  right: 0;
+}
+
+@media (max-width: 768px) {
+  .reviews-carousel-wrapper {
+    padding: 0 40px;
+  }
+
+  .carousel-nav-btn {
+    width: 38px;
+    height: 38px;
+    font-size: 1rem;
+  }
+}
+</style>

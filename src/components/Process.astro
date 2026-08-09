@@ -1,0 +1,43 @@
+---
+const steps = [
+  {
+    step: "Step 1",
+    title: "Consultation & Design",
+    desc: "We start by listening to your vision during our consultation. We measure your space, discuss your goals, and create a custom plan tailored to your budget.",
+    image: "/assets/process-step1.webp"
+  },
+  {
+    step: "Step 2",
+    title: "We Build Your Project",
+    desc: "Once you approve the plan, our experienced crew gets to work. We handle everything from site prep to final installation with efficiency and quality craftsmanship.",
+    image: "/assets/process-step2.webp"
+  },
+  {
+    step: "Step 3",
+    title: "Enjoy Your Space",
+    desc: "Sit back and relax in your newly transformed outdoor space. Your satisfaction is our priority, and we guarantee you'll love the end result.",
+    image: "/assets/process-step3.webp"
+  }
+];
+---
+
+<section class="process-section" id="process">
+  <div class="container">
+    <span class="section-eyebrow">How We Work</span>
+    <h2 class="section-title">The Simple Got Yard Process</h2>
+    <p class="section-desc">We make your yard transformation seamless from start to finish with our 3-step process.</p>
+
+    <div class="process-grid">
+      {steps.map(s => (
+        <div class="process-card">
+          <img src={s.image} alt={s.title} class="process-card-img" />
+          <div class="process-card-body">
+            <span class="process-step-tag">{s.step}</span>
+            <h3 class="process-card-title">{s.title}</h3>
+            <p class="process-card-desc">{s.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

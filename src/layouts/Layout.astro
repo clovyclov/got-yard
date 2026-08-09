@@ -1,0 +1,86 @@
+---
+import '../styles/global.css';
+import QuoteModal from '../components/QuoteModal.astro';
+import LocalBusinessSchema from '../components/LocalBusinessSchema.astro';
+import TrackingSnippets from '../components/TrackingSnippets.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  bingUetTagId?: string;
+  gtmContainerId?: string;
+  ga4MeasurementId?: string;
+  clarityProjectId?: string;
+}
+
+const { 
+  title = "Got Yard? Landscape Construction | Marysville & Snohomish County Landscaping",
+  description = "Got Yard delivers custom paver patios, composite decks, block retaining walls, drainage systems, and full yard transformations across Marysville, Arlington, Everett & Snohomish County. Free estimates!",
+  image = "https://gotyardlandscape.com/assets/3109C95B-6E8B-4255-9C4A-04ECA2D9E075.webp",
+  bingUetTagId,
+  gtmContainerId,
+  ga4MeasurementId,
+  clarityProjectId
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, 'https://gotyardlandscape.com').href;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{title}</title>
+  <meta name="description" content={description}>
+  <link rel="canonical" href={canonicalURL} />
+
+  <!-- Open Graph / Facebook / LinkedIn -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content={canonicalURL}>
+  <meta property="og:title" content={title}>
+  <meta property="og:description" content={description}>
+  <meta property="og:image" content={image}>
+  <meta property="og:site_name" content="Got Yard? Landscape Construction">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content={canonicalURL}>
+  <meta name="twitter:title" content={title}>
+  <meta name="twitter:description" content={description}>
+  <meta name="twitter:image" content={image}>
+
+  <!-- Local Geo Meta Tags -->
+  <meta name="geo.region" content="US-WA">
+  <meta name="geo.placename" content="Marysville">
+  <meta name="geo.position" content="48.0518;-122.1771">
+  <meta name="ICBM" content="48.0518, -122.1771">
+
+  <!-- Theme Color & Favicon -->
+  <meta name="theme-color" content="#89e44d">
+  <link rel="icon" type="image/webp" href="/assets/logo-main.webp">
+
+  <!-- Conversion Tracking Snippets & Tag Manager -->
+  <TrackingSnippets 
+    bingUetTagId={bingUetTagId}
+    gtmContainerId={gtmContainerId}
+    ga4MeasurementId={ga4MeasurementId}
+    clarityProjectId={clarityProjectId}
+  />
+
+  <!-- Schema.org Structured Data -->
+  <LocalBusinessSchema />
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCLD4F8D"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <slot />
+  <QuoteModal />
+  <script src="/app.js" is:inline></script>
+</body>
+</html>

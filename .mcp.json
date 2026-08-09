@@ -1,0 +1,16 @@
+{
+  "mcpServers": {
+    "gotyardlandscape-com-got-yard-wordpress": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@automattic/mcp-wordpress-remote@latest"
+      ],
+      "env": {
+        "WP_API_URL": "https://gotyardlandscape.com/wp-json/mcp/mcp-adapter-default-server",
+        "WP_API_USERNAME": "migiyihimu1299",
+        "WP_API_PASSWORD": "YWHOuCjbvh072pJ0hdOupRBB"
+      }
+    }
+  }
+}

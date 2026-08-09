@@ -1,0 +1,63 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+  buttonText?: string;
+  className?: string;
+}
+
+const {
+  title = "Get A Free, Quick, & Easy Quote For Your Yard Transformation",
+  subtitle = "Fill out the form below for a free estimate on your next project! Response time guaranteed!",
+  buttonText = "Request A Free Quote",
+  className = ""
+} = Astro.props;
+---
+
+<div class={`quote-card ${className}`}>
+  <div class="quote-card-header">
+    <h2 class="quote-card-title">{title}</h2>
+    <p class="quote-card-sub">{subtitle}</p>
+  </div>
+
+  <form class="quote-form">
+    <div class="form-group">
+      <label class="form-label" for="quoteName">Full Name *</label>
+      <input type="text" id="quoteName" class="form-control" placeholder="John Doe" required />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="quoteEmail">Email *</label>
+      <input type="email" id="quoteEmail" class="form-control" placeholder="john@example.com" required />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="quotePhone">Phone *</label>
+      <input type="tel" id="quotePhone" class="form-control" placeholder="(425) 696-1427" required />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="quoteCity">City *</label>
+      <input type="text" id="quoteCity" class="form-control" placeholder="e.g. Marysville, Everett, Lake Stevens" required />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="quoteService">Type of Service Requested</label>
+      <select id="quoteService" class="form-control">
+        <option value="Landscape Design">Landscape Design & Installation</option>
+        <option value="Deck Building">Deck Building & Composite Decks</option>
+        <option value="Hardscaping & Patios">Hardscaping, Patios & Retaining Walls</option>
+        <option value="Construction">Construction & Structural</option>
+        <option value="Sod & Irrigation">Sod Installation & Irrigation</option>
+        <option value="Other Service">Other Custom Yard Service</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="quoteDetails">Tell us about your project</label>
+      <textarea id="quoteDetails" class="form-control" placeholder="Describe what you want built or transformed..."></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-form-submit">{buttonText}</button>
+  </form>
+</div>

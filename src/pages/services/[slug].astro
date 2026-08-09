@@ -1,0 +1,498 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import Reviews from '../../components/Reviews.astro';
+import Gallery from '../../components/Gallery.astro';
+import Process from '../../components/Process.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import Footer from '../../components/Footer.astro';
+import { servicesData, type ServicePageData } from '../../data/servicesData';
+
+export async function getStaticPaths() {
+  return servicesData.map(service => ({
+    params: { slug: service.slug },
+    props: { service }
+  }));
+}
+
+interface Props {
+  service: ServicePageData;
+}
+
+const { service } = Astro.props;
+
+// Schema.org Service JSON-LD
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": service.headline,
+  "serviceType": service.titleName,
+  "provider": {
+    "@type": "LandscapingAndGardeningService",
+    "name": "Got Yard? Landscape Construction",
+    "telephone": "+14256961427",
+    "image": "https://gotyardlandscape.com/assets/logo-light.webp"
+  },
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Snohomish County, WA"
+  },
+  "description": service.description
+};
+---
+
+<Layout
+  title={`${service.headline} | Got Yard? Landscape Construction`}
+  description={service.description}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+
+  <Header />
+
+  <!-- Hero Section -->
+  <section class="service-hero" style={`background-image: linear-gradient(180deg, rgba(16, 19, 17, 0.82) 0%, rgba(16, 19, 17, 0.96) 100%), url('${service.heroImage || "/assets/hero-bg.webp"}');`}>
+    <div class="container">
+      <div class="service-hero-grid">
+        
+        <!-- Left Column: Hero Copy -->
+        <div class="service-hero-text">
+          <span class="service-badge-tag">{service.tagline}</span>
+
+          <h1 class="service-main-heading">
+            {service.headline}
+          </h1>
+
+          <p class="service-lead-p">
+            {service.leadParagraph}
+          </p>
+
+          <ul class="service-bullets">
+            {service.heroBullets.map(bullet => (
+              <li>{bullet}</li>
+            ))}
+          </ul>
+
+          <div class="service-hero-actions">
+            <a href="tel:4256961427" class="btn btn-gold">Click To Call (425) 696-1427</a>
+          </div>
+        </div>
+
+        <!-- Right Column: Modular Lead Quote Form -->
+        <div class="service-hero-form-wrapper">
+          <QuoteForm 
+            title={`Request ${service.titleName} Quote`}
+            subtitle="Fast estimates guaranteed. Tell us about your project!"
+            buttonText="Submit Quote Request"
+          />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Proof Bar -->
+  <div class="service-proof-bar">
+    <div class="container">
+      <p>
+        ★★★★★ <strong>5.0 Google Star Rating</strong> | Licensed, Bonded & Insured Landscape Contractors Serving All Snohomish County
+      </p>
+    </div>
+  </div>
+
+  <!-- Sub-Services 4-Card Highlight Grid -->
+  <section class="sub-services-section">
+    <div class="container">
+      <div class="sub-services-header">
+        <span class="section-eyebrow">Comprehensive Expertise</span>
+        <h2 class="section-title">Our {service.titleName} Solutions</h2>
+        <p class="section-desc">From initial site excavation to precision installation, we deliver top-tier craftsmanship for every project.</p>
+      </div>
+
+      <div class="sub-services-grid">
+        {service.subServices.map(card => (
+          <div class="sub-service-card">
+            <div class="sub-service-icon" set:html={card.iconSvg} />
+            <h3 class="sub-service-title">{card.title}</h3>
+            <p class="sub-service-desc">{card.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Alternating Left & Right Feature Split Sections (Real Work Photos) -->
+  <section class="service-split-section">
+    <div class="container">
+      {service.splitSections.map((sec, idx) => (
+        <div class={`service-split-row ${sec.imageLeft ? 'image-left' : 'image-right'}`}>
+          <div class="service-split-img-col">
+            <div class="service-split-frame">
+              <img src={sec.image} alt={sec.imageAlt} loading="lazy" class="service-split-img" />
+            </div>
+          </div>
+
+          <div class="service-split-text-col">
+            <span class="service-split-eyebrow">{sec.eyebrow}</span>
+            <h2 class="service-split-title">{sec.title}</h2>
+            <p class="service-split-desc">{sec.description}</p>
+            <ul class="service-split-bullet-list">
+              {sec.bullets.map(b => (
+                <li>✔ {b}</li>
+              ))}
+            </ul>
+            <button type="button" class="btn btn-primary js-open-quote-modal">Start Your {service.titleName} Project</button>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Client Reviews Strip -->
+  <Reviews />
+
+  <!-- Photo Gallery -->
+  <Gallery />
+
+  <!-- 3-Step Process -->
+  <Process />
+
+  <!-- FAQ Accordion -->
+  <FaqAccordion 
+    cityName="Snohomish County"
+    state="WA"
+    faqs={service.faqs}
+  />
+
+  <!-- Bottom CTA Banner -->
+  <section class="service-bottom-cta">
+    <div class="container">
+      <div class="cta-banner-card">
+        <h2 class="cta-title">Ready To Upgrade Your Property With {service.titleName}?</h2>
+        <p class="cta-desc">Contact Got Yard today for a free on-site consultation and estimate. We turn your outdoor vision into reality.</p>
+        <div class="cta-btn-wrap">
+          <button type="button" class="btn btn-gold js-open-quote-modal">Request A Free Quote</button>
+          <a href="tel:4256961427" class="btn btn-primary">Click To Call (425) 696-1427</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+/* Hero Section */
+.service-hero {
+  padding-top: 140px;
+  padding-bottom: 80px;
+  background: linear-gradient(180deg, rgba(16, 19, 17, 0.85) 0%, rgba(16, 19, 17, 0.98) 100%),
+              url('/assets/hero-bg.webp') center/cover no-repeat;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.service-hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .service-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .service-hero-text {
+    text-align: center;
+  }
+
+  .service-bullets {
+    align-items: center;
+    text-align: center;
+  }
+
+  .service-hero-actions {
+    justify-content: center;
+  }
+}
+
+.service-badge-tag {
+  display: inline-block;
+  background: #89e44d;
+  border: 2px solid #000000;
+  box-shadow: 3px 4px 0px 0px #000000;
+  color: #000000;
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.service-main-heading {
+  font-family: var(--font-heading);
+  font-size: 3.6rem;
+  font-weight: 700;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--clr-text-main);
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .service-main-heading {
+    font-size: 2.5rem;
+  }
+}
+
+.service-lead-p {
+  font-size: 1.1rem;
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.service-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.service-bullets li {
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--clr-accent-gold);
+}
+
+.service-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Proof Bar */
+.service-proof-bar {
+  background-color: var(--clr-bg-card);
+  border-bottom: 1px solid var(--clr-border);
+  padding: 16px 0;
+  text-align: center;
+}
+
+.service-proof-bar p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--clr-text-main);
+}
+
+.service-proof-bar strong {
+  color: var(--clr-accent-gold);
+}
+
+/* Sub-Services Grid */
+.sub-services-section {
+  padding: 90px 0;
+  background-color: var(--clr-bg-dark);
+  text-align: center;
+}
+
+.sub-services-header {
+  margin-bottom: 48px;
+}
+
+.sub-services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 992px) {
+  .sub-services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .sub-services-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sub-service-card {
+  background: var(--clr-bg-card);
+  border: 2px solid #000000;
+  box-shadow: 4px 6px 0px 0px #000000;
+  padding: 32px 24px;
+  text-align: left;
+  transition: transform 0.2s ease;
+}
+
+.sub-service-card:hover {
+  transform: translateY(-4px);
+}
+
+.sub-service-icon {
+  margin-bottom: 16px;
+}
+
+.sub-service-title {
+  font-family: var(--font-heading);
+  font-size: 1.4rem;
+  color: var(--clr-text-main);
+  margin-bottom: 10px;
+}
+
+.sub-service-desc {
+  font-size: 0.95rem;
+  color: var(--clr-text-muted);
+  line-height: 1.6;
+}
+
+/* Alternating Left & Right Feature Split Section */
+.service-split-section {
+  padding: 90px 0;
+  background-color: var(--clr-bg-surface);
+  border-top: 1px solid var(--clr-border);
+}
+
+.service-split-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+  margin-bottom: 90px;
+}
+
+.service-split-row:last-child {
+  margin-bottom: 0;
+}
+
+.service-split-row.image-right .service-split-img-col {
+  order: 2;
+}
+
+.service-split-row.image-right .service-split-text-col {
+  order: 1;
+}
+
+@media (max-width: 992px) {
+  .service-split-row {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    margin-bottom: 60px;
+  }
+
+  .service-split-row.image-right .service-split-img-col,
+  .service-split-row.image-right .service-split-text-col {
+    order: initial;
+  }
+}
+
+.service-split-frame {
+  border: 3px solid #000000;
+  box-shadow: 6px 8px 0px 0px #000000;
+  overflow: hidden;
+  height: 380px;
+}
+
+.service-split-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.service-split-eyebrow {
+  display: inline-block;
+  background: #e5a93c;
+  border: 2px solid #000000;
+  box-shadow: 2px 3px 0px 0px #000000;
+  color: #000000;
+  padding: 4px 14px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.service-split-title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: var(--clr-text-main);
+  line-height: 1.15;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .service-split-title {
+    font-size: 2rem;
+  }
+}
+
+.service-split-desc {
+  font-size: 1.05rem;
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.service-split-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.service-split-bullet-list li {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Bottom CTA Banner */
+.service-bottom-cta {
+  padding: 80px 0;
+  background: var(--clr-bg-dark);
+}
+
+.cta-banner-card {
+  background: linear-gradient(135deg, #1e3a1a 0%, #10240e 100%);
+  border: 3px solid #000000;
+  box-shadow: 6px 8px 0px 0px #000000;
+  padding: 56px 40px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.cta-title {
+  font-family: var(--font-heading);
+  font-size: 2.8rem;
+  color: #ffffff;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.cta-desc {
+  font-size: 1.1rem;
+  color: #c0d4be;
+  max-width: 700px;
+  margin: 0 auto 32px auto;
+  line-height: 1.6;
+}
+
+.cta-btn-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+</style>

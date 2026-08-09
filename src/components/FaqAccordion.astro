@@ -1,0 +1,115 @@
+---
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  cityName: string;
+  state: string;
+  faqs: FaqItem[];
+}
+
+const { cityName, state, faqs } = Astro.props;
+
+// Generate FAQPage JSON-LD Schema
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map(faq => ({
+    "@type": "Question",
+    "name": faq.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": faq.answer
+    }
+  }))
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
+<section class="faq-section" id="faq">
+  <div class="container">
+    <span class="section-eyebrow">Frequently Asked Questions</span>
+    <h2 class="section-title">Landscaping FAQs in {cityName}, {state}</h2>
+    <p class="section-desc">Got questions about landscape permits, drainage, or project timelines in {cityName}? Here are answers to common questions from local homeowners.</p>
+
+    <div class="faq-accordion">
+      {faqs.map((item, idx) => (
+        <details class="faq-item" open={idx === 0}>
+          <summary class="faq-question">
+            <span>{item.question}</span>
+            <span class="faq-icon">+</span>
+          </summary>
+          <div class="faq-answer">
+            <p>{item.answer}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.faq-section {
+  padding: 90px 0;
+  background-color: var(--clr-bg-surface);
+  border-top: 1px solid var(--clr-border);
+  text-align: center;
+}
+
+.faq-accordion {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.faq-item {
+  background: var(--clr-bg-card);
+  border: 1px solid var(--clr-border);
+  margin-bottom: 16px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.faq-item[open] {
+  border-color: var(--clr-accent-gold);
+}
+
+.faq-question {
+  padding: 20px 24px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--clr-text-main);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style: none;
+  user-select: none;
+}
+
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+  color: var(--clr-accent-gold);
+}
+
+.faq-icon {
+  font-size: 1.4rem;
+  transition: transform 0.2s ease;
+  color: var(--clr-primary-glow);
+}
+
+.faq-answer {
+  padding: 0 24px 24px 24px;
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+  font-size: 1rem;
+}
+</style>

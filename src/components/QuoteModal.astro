@@ -1,0 +1,89 @@
+---
+import QuoteForm from './QuoteForm.astro';
+---
+
+<div class="quote-modal-backdrop" id="quoteModal">
+  <div class="quote-modal-content">
+    <button type="button" class="quote-modal-close" id="closeQuoteModalBtn" aria-label="Close Modal">&times;</button>
+    <QuoteForm 
+      title="Start Your Project"
+      subtitle="Fill out the form below to request a free quote. Fast response guaranteed!"
+      buttonText="Submit Quote Request"
+    />
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('quoteModal');
+    const closeBtn = document.getElementById('closeQuoteModalBtn');
+    const openBtns = document.querySelectorAll('.js-open-quote-modal');
+
+    openBtns.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (modal) modal.classList.add('active');
+      });
+    });
+
+    if (closeBtn && modal) {
+      closeBtn.addEventListener('click', () => {
+        modal.classList.remove('active');
+      });
+    }
+
+    if (modal) {
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
+    }
+  });
+</script>
+
+<style>
+.quote-modal-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.quote-modal-backdrop.active {
+  display: flex;
+}
+
+.quote-modal-content {
+  position: relative;
+  max-width: 580px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.quote-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 20px;
+  background: transparent;
+  border: none;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #111111;
+  cursor: pointer;
+  z-index: 20;
+  line-height: 1;
+  transition: transform 0.15s ease;
+}
+
+.quote-modal-close:hover {
+  transform: scale(1.2);
+  color: var(--clr-primary-glow);
+}
+</style>

@@ -1,0 +1,175 @@
+---
+import '../styles/global.css';
+import QuoteModal from '../components/QuoteModal.astro';
+import TrackingSnippets from '../components/TrackingSnippets.astro';
+
+interface Props {
+  cityName: string;
+  state: string;
+  zipCode?: string;
+  latitude?: number;
+  longitude?: number;
+  title: string;
+  description: string;
+  canonicalUrl?: string;
+  bingUetTagId?: string;
+  gtmContainerId?: string;
+  ga4MeasurementId?: string;
+  clarityProjectId?: string;
+}
+
+const {
+  cityName,
+  state,
+  zipCode = "98223",
+  latitude = 48.1986,
+  longitude = -122.1251,
+  title,
+  description,
+  canonicalUrl = `https://gotyardlandscape.com/service-areas/${cityName.toLowerCase().replace(/\s+/g, '-')}-${state.toLowerCase()}`,
+  bingUetTagId,
+  gtmContainerId,
+  ga4MeasurementId,
+  clarityProjectId
+} = Astro.props;
+
+// LocalBusiness Schema.org JSON-LD
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LandscapingAndGardeningService",
+  "name": `Got Yard? Landscape Construction - ${cityName}, ${state}`,
+  "image": "https://gotyardlandscape.com/assets/logo-light.webp",
+  "@id": "https://gotyardlandscape.com/#organization",
+  "url": canonicalUrl,
+  "telephone": "+14256961427",
+  "priceRange": "$$",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Marysville & Surrounding Snohomish County",
+    "addressLocality": cityName,
+    "addressRegion": state,
+    "postalCode": zipCode,
+    "addressCountry": "US"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": latitude,
+    "longitude": longitude
+  },
+  "areaServed": [
+    {
+      "@type": "City",
+      "name": cityName,
+      "sameAs": `https://en.wikipedia.org/wiki/${encodeURIComponent(cityName)},_${state}`
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Snohomish County"
+    }
+  ],
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "opens": "07:00",
+    "closes": "18:00"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "10",
+    "bestRating": "5",
+    "worstRating": "1"
+  }
+};
+
+// BreadcrumbList Schema.org JSON-LD
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://gotyardlandscape.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Service Areas",
+      "item": "https://gotyardlandscape.com/service-areas/marysville-wa"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": `${cityName}, ${state}`,
+      "item": canonicalUrl
+    }
+  ]
+};
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalUrl} />
+
+  <!-- OpenGraph Tags -->
+  <meta property="og:type" content="business.business" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content="https://gotyardlandscape.com/assets/hero-bg.webp" />
+  <meta property="og:site_name" content="Got Yard? Landscape Construction" />
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content={canonicalUrl} />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content="https://gotyardlandscape.com/assets/hero-bg.webp" />
+
+  <!-- Local Geo Meta Tags -->
+  <meta name="geo.region" content="US-WA" />
+  <meta name="geo.placename" content={cityName} />
+  <meta name="geo.position" content={`${latitude};${longitude}`} />
+  <meta name="ICBM" content={`${latitude}, ${longitude}`} />
+
+  <!-- Theme Color & Favicon -->
+  <meta name="theme-color" content="#89e44d" />
+  <link rel="icon" type="image/webp" href="/assets/logo-main.webp" />
+
+  <!-- Conversion Tracking Snippets & Tag Manager -->
+  <TrackingSnippets 
+    bingUetTagId={bingUetTagId}
+    gtmContainerId={gtmContainerId}
+    ga4MeasurementId={ga4MeasurementId}
+    clarityProjectId={clarityProjectId}
+  />
+
+  <!-- Schema.org JSON-LD Structured Data -->
+  <script type="application/ld+json" set:html={JSON.stringify(localBusinessSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCLD4F8D"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <slot />
+  <QuoteModal />
+  <script src="/app.js" is:inline></script>
+</body>
+</html>

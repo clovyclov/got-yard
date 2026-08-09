@@ -1,0 +1,121 @@
+---
+---
+
+<header class="site-header">
+  <div class="container">
+    <nav class="navbar">
+      <a href="/" class="brand-logo">
+        <img src="/assets/logo-light.webp" alt="Got Yard? Landscape Construction Logo">
+      </a>
+
+      <ul class="nav-menu" id="navMenu">
+        <!-- Services Dropdown -->
+        <li class="nav-item-dropdown">
+          <a href="#" class="nav-link dropdown-toggle">
+            Our Services <span class="dropdown-arrow">▾</span>
+          </a>
+          <div class="dropdown-menu">
+            <a href="/services/hardscaping" class="dropdown-item">Hardscaping & Patios</a>
+            <a href="/services/landscaping" class="dropdown-item">Landscaping & Sod</a>
+            <a href="/services/landscape-design" class="dropdown-item">3D Landscape Design</a>
+            <a href="/services/pressure-washing" class="dropdown-item">Pressure Washing</a>
+            <a href="/services/decks" class="dropdown-item">Decks & Structures</a>
+            <a href="/services/irrigation-system-installation" class="dropdown-item">Irrigation & Sprinklers</a>
+            <a href="/gallery" class="dropdown-item">Retaining Walls</a>
+          </div>
+        </li>
+
+        <!-- Dynamic Service Areas Dropdown -->
+        <li class="nav-item-dropdown">
+          <a href="#" class="nav-link dropdown-toggle">
+            Service Areas <span class="dropdown-arrow">▾</span>
+          </a>
+          <div class="dropdown-menu">
+            <a href="/service-areas/arlington-wa" class="dropdown-item">Arlington, WA</a>
+            <a href="/service-areas/marysville-wa" class="dropdown-item">Marysville, WA</a>
+            <a href="/service-areas/everett-wa" class="dropdown-item">Everett, WA</a>
+            <a href="/service-areas/lake-stevens-wa" class="dropdown-item">Lake Stevens, WA</a>
+            <a href="/service-areas/stanwood-wa" class="dropdown-item">Stanwood, WA</a>
+            <a href="/service-areas/snohomish-wa" class="dropdown-item">Snohomish, WA</a>
+            <a href="/service-areas/granite-falls-wa" class="dropdown-item">Granite Falls, WA</a>
+            <a href="/service-areas/seattle-wa" class="dropdown-item">Seattle, WA</a>
+            <a href="/service-areas/mill-creek-wa" class="dropdown-item">Mill Creek, WA</a>
+          </div>
+        </li>
+
+        <li><a href="/gallery" class="nav-link">Project Gallery</a></li>
+
+        <li><a href="tel:4256961427" class="nav-phone">(425) 696-1427</a></li>
+        <li>
+          <button type="button" class="btn btn-primary js-open-quote-modal">Start Your Project</button>
+        </li>
+      </ul>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle Navigation">☰</button>
+    </nav>
+  </div>
+</header>
+
+<style>
+.nav-item-dropdown {
+  position: relative;
+}
+
+.dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.dropdown-arrow {
+  font-size: 0.8rem;
+  color: var(--clr-accent-gold);
+  transition: transform 0.2s ease;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: var(--clr-bg-card);
+  border: 2px solid #000000;
+  box-shadow: 4px 6px 0px 0px #000000;
+  min-width: 220px;
+  padding: 8px 0;
+  display: none;
+  flex-direction: column;
+  z-index: 1200;
+}
+
+.nav-item-dropdown:hover .dropdown-menu {
+  display: flex;
+}
+
+.nav-item-dropdown:hover .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+.dropdown-item {
+  padding: 10px 20px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--clr-text-main);
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.dropdown-item:hover {
+  background: #89e44d;
+  color: #000000;
+}
+
+@media (max-width: 992px) {
+  .dropdown-menu {
+    position: static;
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    padding: 0;
+  }
+}
+</style>

@@ -1,0 +1,416 @@
+---
+import ServiceAreaLayout from '../../layouts/ServiceAreaLayout.astro';
+import Header from '../../components/Header.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import Services from '../../components/Services.astro';
+import Reviews from '../../components/Reviews.astro';
+import Gallery from '../../components/Gallery.astro';
+import Process from '../../components/Process.astro';
+import LocalLandmarks from '../../components/LocalLandmarks.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import Footer from '../../components/Footer.astro';
+import { serviceAreasData, type ServiceAreaData } from '../../data/serviceAreas';
+
+export async function getStaticPaths() {
+  return serviceAreasData.map(area => ({
+    params: { slug: area.slug },
+    props: { area }
+  }));
+}
+
+interface Props {
+  area: ServiceAreaData;
+}
+
+const { area } = Astro.props;
+---
+
+<ServiceAreaLayout
+  cityName={area.cityName}
+  state={area.state}
+  zipCode={area.zipCode}
+  latitude={area.latitude}
+  longitude={area.longitude}
+  title={`${area.headline} | Got Yard? Landscape Construction`}
+  description={area.description}
+>
+  <Header />
+
+  <!-- Traditional 2-Column Split Hero Section -->
+  <section class="sa-trad-hero">
+    <div class="container">
+      <div class="sa-hero-grid">
+        
+        <!-- Left Column: Hero Text Content -->
+        <div class="sa-hero-text">
+          <span class="sa-badge-tag">Serving {area.cityName}, {area.state} & Snohomish County</span>
+
+          <h1 class="sa-main-heading">
+            {area.headline}
+          </h1>
+
+          <p class="sa-lead-p">
+            {area.leadParagraph}
+          </p>
+
+          <ul class="sa-bullets">
+            {area.heroBullets.map(bullet => (
+              <li>{bullet}</li>
+            ))}
+          </ul>
+
+          <div class="sa-hero-actions">
+            <a href="tel:4256961427" class="btn btn-gold">Click To Call (425) 696-1427</a>
+          </div>
+        </div>
+
+        <!-- Right Column: Modular Lead Quote Request Form -->
+        <div class="sa-hero-form-wrapper">
+          <QuoteForm 
+            title={`Get A Free Quote in ${area.cityName}`}
+            subtitle="Fast responses guaranteed. Tell us about your project!"
+            buttonText="Request Free Estimate"
+          />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Local Proof Bar -->
+  <div class="sa-proof-bar">
+    <div class="container">
+      <p>
+        ★★★★★ <strong>5.0 Rating on Google Reviews</strong> | Trusted by Homeowners Across {area.cityName}, Snohomish & Surrounding Communities
+      </p>
+    </div>
+  </div>
+
+  <!-- Alternating Left & Right Feature Highlight Sections (Real Work Photos) -->
+  <section class="sa-split-features-section">
+    <div class="container">
+      {area.splitSections.map((section, idx) => (
+        <div class={`sa-split-row ${section.imageLeft ? 'image-left' : 'image-right'}`}>
+          <div class="sa-split-image-col">
+            <div class="sa-split-img-frame">
+              <img src={section.image} alt={section.imageAlt} loading="lazy" class="sa-split-img" />
+            </div>
+          </div>
+
+          <div class="sa-split-text-col">
+            <span class="sa-split-eyebrow">{section.eyebrow}</span>
+            <h2 class="sa-split-title">{section.title}</h2>
+            <p class="sa-split-desc">{section.description}</p>
+            <ul class="sa-split-bullet-list">
+              {section.bullets.map(b => (
+                <li>✔ {b}</li>
+              ))}
+            </ul>
+            <button type="button" class="btn btn-primary js-open-quote-modal">Start Your {area.cityName} Project</button>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- 6 Services Grid -->
+  <Services />
+
+  <!-- Local Landmarks E-E-A-T Section -->
+  <LocalLandmarks 
+    cityName={area.cityName}
+    state={area.state}
+    tagline={area.tagline}
+    landmarks={area.landmarks}
+    neighborhoods={area.neighborhoods}
+  />
+
+  <!-- Client Reviews -->
+  <Reviews />
+
+  <!-- Gallery -->
+  <Gallery />
+
+  <!-- Process -->
+  <Process />
+
+  <!-- FAQ Accordion with Schema.org JSON-LD -->
+  <FaqAccordion 
+    cityName={area.cityName}
+    state={area.state}
+    faqs={area.faqs}
+  />
+
+  <!-- Bottom Call To Action Banner -->
+  <section class="sa-bottom-cta">
+    <div class="container">
+      <div class="cta-banner-card">
+        <h2 class="cta-title">Ready To Transform Your Yard In {area.cityName}, {area.state}?</h2>
+        <p class="cta-desc">Contact Got Yard today for a free on-site consultation and quote. We turn your outdoor space into the yard of your dreams.</p>
+        <div class="cta-btn-wrap">
+          <button type="button" class="btn btn-gold js-open-quote-modal">Request A Free Quote</button>
+          <a href="tel:4256961427" class="btn btn-primary">Click To Call (425) 696-1427</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</ServiceAreaLayout>
+
+<style>
+/* Hero Section */
+.sa-trad-hero {
+  padding-top: 140px;
+  padding-bottom: 80px;
+  background: linear-gradient(180deg, rgba(16, 19, 17, 0.85) 0%, rgba(16, 19, 17, 0.98) 100%),
+              url('/assets/hero-bg.webp') center/cover no-repeat;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.sa-hero-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 48px;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .sa-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .sa-hero-text {
+    text-align: center;
+  }
+
+  .sa-bullets {
+    align-items: center;
+    text-align: center;
+  }
+
+  .sa-hero-actions {
+    justify-content: center;
+  }
+}
+
+.sa-badge-tag {
+  display: inline-block;
+  background: #89e44d;
+  border: 2px solid #000000;
+  box-shadow: 3px 4px 0px 0px #000000;
+  color: #000000;
+  padding: 8px 18px;
+  border-radius: 0px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.sa-main-heading {
+  font-family: var(--font-heading);
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--clr-text-main);
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 768px) {
+  .sa-main-heading {
+    font-size: 2.5rem;
+  }
+}
+
+.sa-lead-p {
+  font-size: 1.1rem;
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.sa-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sa-bullets li {
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--clr-accent-gold);
+}
+
+.sa-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Proof Bar */
+.sa-proof-bar {
+  background-color: var(--clr-bg-card);
+  border-bottom: 1px solid var(--clr-border);
+  padding: 16px 0;
+  text-align: center;
+}
+
+.sa-proof-bar p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--clr-text-main);
+}
+
+.sa-proof-bar strong {
+  color: var(--clr-accent-gold);
+}
+
+/* Alternating Left/Right Split Feature Section */
+.sa-split-features-section {
+  padding: 90px 0;
+  background-color: var(--clr-bg-dark);
+}
+
+.sa-split-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 56px;
+  align-items: center;
+  margin-bottom: 90px;
+}
+
+.sa-split-row:last-child {
+  margin-bottom: 0;
+}
+
+.sa-split-row.image-right .sa-split-image-col {
+  order: 2;
+}
+
+.sa-split-row.image-right .sa-split-text-col {
+  order: 1;
+}
+
+@media (max-width: 992px) {
+  .sa-split-row {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    margin-bottom: 60px;
+  }
+
+  .sa-split-row.image-right .sa-split-image-col,
+  .sa-split-row.image-right .sa-split-text-col {
+    order: initial;
+  }
+}
+
+.sa-split-img-frame {
+  border: 3px solid #000000;
+  box-shadow: 6px 8px 0px 0px #000000;
+  overflow: hidden;
+  height: 380px;
+}
+
+.sa-split-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sa-split-eyebrow {
+  display: inline-block;
+  background: #e5a93c;
+  border: 2px solid #000000;
+  box-shadow: 2px 3px 0px 0px #000000;
+  color: #000000;
+  padding: 4px 14px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.sa-split-title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: var(--clr-text-main);
+  line-height: 1.15;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .sa-split-title {
+    font-size: 2rem;
+  }
+}
+
+.sa-split-desc {
+  font-size: 1.05rem;
+  color: var(--clr-text-muted);
+  line-height: 1.7;
+  margin-bottom: 20px;
+}
+
+.sa-split-bullet-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sa-split-bullet-list li {
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+/* Bottom CTA Banner */
+.sa-bottom-cta {
+  padding: 80px 0;
+  background: var(--clr-bg-surface);
+}
+
+.cta-banner-card {
+  background: linear-gradient(135deg, #1e3a1a 0%, #10240e 100%);
+  border: 3px solid #000000;
+  box-shadow: 6px 8px 0px 0px #000000;
+  padding: 56px 40px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.cta-title {
+  font-family: var(--font-heading);
+  font-size: 2.8rem;
+  color: #ffffff;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.cta-desc {
+  font-size: 1.1rem;
+  color: #c0d4be;
+  max-width: 700px;
+  margin: 0 auto 32px auto;
+  line-height: 1.6;
+}
+
+.cta-btn-wrap {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+</style>

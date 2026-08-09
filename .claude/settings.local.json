@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" https://gotyardlandscape.com/wp-json/ --max-time 15)",
+      "Bash(curl -s https://gotyardlandscape.com/wp-json/ --max-time 15)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(d.get\\('namespaces'\\)\\)\")",
+      "Bash(curl -s https://gotyardlandscape.com/wp-json/ --max-time 15 -H \"Accept: application/json\")",
+      "Bash(claude mcp *)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" https://gotyardlandscape.com/wp-json/mcp/mcp-adapter-default-server --max-time 15)",
+      "Bash(curl -s https://gotyardlandscape.com/wp-json/mcp/mcp-adapter-default-server --max-time 15)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" -u 'migiyihimu1299:y7ZytAJG8II7ZhKulMxS0r1q' https://gotyardlandscape.com/wp-json/mcp/mcp-adapter-default-server --max-time 15)",
+      "mcp__gotyardlandscape-com-got-yard-wordpress__breakdance-get-instructions",
+      "mcp__gotyardlandscape-com-got-yard-wordpress__breakdance-site-info",
+      "mcp__gotyardlandscape-com-got-yard-wordpress__breakdance-search-posts",
+      "WebSearch"
+    ]
+  }
+}
