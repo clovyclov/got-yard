@@ -50,10 +50,12 @@ function formatEnhancedPhone(phone) {
   return cleaned ? '+' + cleaned : '';
 }
 
-/* 2. Free Quote Form Handling & Validation + Microsoft Ads Enhanced Conversions */
+/* 2. Free Quote Form Handling & Validation + LeadConnector Webhook + Enhanced Conversions */
 function initQuoteForm() {
   const forms = document.querySelectorAll('form');
   if (forms.length === 0) return;
+
+  const WEBHOOK_URL = 'https://services.leadconnectorhq.com/hooks/mEZdHLyN1GHpsy6i3IsC/webhook-trigger/IgjaHCTuqePIYrTkdCUx';
 
   forms.forEach(form => {
     form.addEventListener('submit', (e) => {
@@ -62,12 +64,16 @@ function initQuoteForm() {
       const nameInput = form.querySelector('input[name="name"], #quoteName, .js-name-input');
       const emailInput = form.querySelector('input[name="email"], #quoteEmail, .js-email-input');
       const phoneInput = form.querySelector('input[name="phone"], #quotePhone, .js-phone-input');
+      const cityInput = form.querySelector('input[name="city"], #quoteCity, .js-city-input');
       const serviceInput = form.querySelector('select[name="service"], #quoteService, .js-service-select');
+      const detailsInput = form.querySelector('textarea[name="details"], #quoteDetails, .js-details-input');
 
       const name = nameInput ? nameInput.value.trim() : '';
-      const rawEmail = emailInput ? emailInput.value : '';
-      const rawPhone = phoneInput ? phoneInput.value : '';
+      const rawEmail = emailInput ? emailInput.value.trim() : '';
+      const rawPhone = phoneInput ? phoneInput.value.trim() : '';
+      const city = cityInput ? cityInput.value.trim() : '';
       const service = serviceInput ? serviceInput.value : 'General Landscape Request';
+      const details = detailsInput ? detailsInput.value.trim() : '';
 
       if (!name || (!rawEmail && !rawPhone)) {
         showToast('⚠️ Please complete all required contact fields.', 'error');
@@ -94,6 +100,7 @@ function initQuoteForm() {
         event_label: service,
         service_requested: service,
         customer_name: name,
+        city: city,
         user_data: {
           email: formattedEmail,
           phone_number: formattedPhone
@@ -104,13 +111,36 @@ function initQuoteForm() {
       const modal = document.getElementById('quoteModal');
       if (modal) modal.classList.remove('active');
 
-      // Success feedback & redirect to Thank You page
-      showToast(`✅ Thank you ${name}! Your quote request has been submitted. Redirecting...`);
-      form.reset();
+      // Success feedback
+      showToast(`✅ Thank you ${name}! Submitting your quote request...`);
 
-      setTimeout(() => {
+      // Construct LeadConnector Webhook Payload
+      const webhookPayload = {
+        name: name,
+        email: rawEmail,
+        phone: rawPhone,
+        city: city,
+        service: service,
+        details: details,
+        formatted_email: formattedEmail,
+        formatted_phone: formattedPhone,
+        page_url: window.location.href,
+        source: 'Got Yard Website'
+      };
+
+      // Submit to LeadConnector Webhook before redirecting to Thank You page
+      fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(webhookPayload)
+      }).catch(err => {
+        console.error('[LeadConnector Webhook Error]:', err);
+      }).finally(() => {
+        form.reset();
         window.location.href = '/thank-you';
-      }, 600);
+      });
     });
   });
 }
