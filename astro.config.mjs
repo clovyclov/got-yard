@@ -28,7 +28,7 @@ export default defineConfig({
     '/service-area/mill-creek-wa': '/service-areas/mill-creek-wa',
     '/service-area': '/service-areas/marysville-wa',
 
-    // Service Redirects (Old singular /service/ to /services/)
+    // Legacy Service & Page Redirects (Old website paths to new structure)
     '/service/hardscaping': '/services/hardscaping',
     '/service/landscaping': '/services/landscaping',
     '/service/pressure-washing': '/services/pressure-washing',
@@ -38,6 +38,15 @@ export default defineConfig({
     '/service/irrigation': '/services/irrigation-system-installation',
     '/service/landscape-design': '/services/landscape-design',
     '/service/3d-landscape-design': '/services/landscape-design',
-    '/service': '/services/hardscaping'
+    '/service': '/services/hardscaping',
+
+    // Top-Level Legacy Path Redirects
+    '/landscape-design': '/services/landscape-design',
+    '/hardscaping': '/services/hardscaping',
+    '/landscaping': '/services/landscaping',
+    '/pressure-washing': '/services/pressure-washing',
+    '/decks': '/services/decks',
+    '/irrigation': '/services/irrigation-system-installation',
+    '/project-gallery': '/gallery'
   }
 });
