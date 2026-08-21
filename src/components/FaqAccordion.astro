@@ -5,12 +5,20 @@ interface FaqItem {
 }
 
 interface Props {
-  cityName: string;
-  state: string;
+  cityName?: string;
+  state?: string;
+  title?: string;
+  subtitle?: string;
   faqs: FaqItem[];
 }
 
-const { cityName, state, faqs } = Astro.props;
+const { 
+  cityName = "", 
+  state = "", 
+  title, 
+  subtitle, 
+  faqs = [] 
+} = Astro.props;
 
 // Generate FAQPage JSON-LD Schema
 const faqSchema = {
@@ -25,6 +33,18 @@ const faqSchema = {
     }
   }))
 };
+
+const displayTitle = title || (
+  cityName && state 
+    ? `Landscaping FAQs in ${cityName}, ${state}` 
+    : (cityName ? `Landscaping FAQs in ${cityName}` : "Frequently Asked Questions")
+);
+
+const displaySubtitle = subtitle || (
+  cityName 
+    ? `Got questions about landscape permits, drainage, or project timelines in ${cityName}? Here are answers to common questions from local homeowners.`
+    : "Got questions about custom patio builds, permits, drainage, or timelines? Here are answers to common questions from local homeowners."
+);
 ---
 
 <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
@@ -32,8 +52,8 @@ const faqSchema = {
 <section class="faq-section" id="faq">
   <div class="container">
     <span class="section-eyebrow">Frequently Asked Questions</span>
-    <h2 class="section-title">Landscaping FAQs in {cityName}, {state}</h2>
-    <p class="section-desc">Got questions about landscape permits, drainage, or project timelines in {cityName}? Here are answers to common questions from local homeowners.</p>
+    <h2 class="section-title">{displayTitle}</h2>
+    <p class="section-desc">{displaySubtitle}</p>
 
     <div class="faq-accordion">
       {faqs.map((item, idx) => (
