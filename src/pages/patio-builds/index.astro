@@ -1,0 +1,623 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import QuoteForm from '../../components/QuoteForm.astro';
+import Reviews from '../../components/Reviews.astro';
+import Process from '../../components/Process.astro';
+import FaqAccordion from '../../components/FaqAccordion.astro';
+import Footer from '../../components/Footer.astro';
+
+const patioBuildFaqs = [
+  {
+    question: "What types of patio builds does Got Yard design and construct?",
+    answer: "We design and build complete outdoor living spaces, including interlocking stone paver patios, natural flagstone patios, covered patio rooms, pergolas, built-in fire pits and fireplaces, outdoor kitchens, seating walls, and patio-to-deck seamless combinations."
+  },
+  {
+    question: "How much does a custom dream patio build cost in Snohomish County?",
+    answer: "Complete patio build costs depend on overall square footage, material selections, grade adjustments, and custom additions like fire tables, seating walls, or covered structures. Standard hardscape patio builds range from $18 to $35 per sq ft, while multi-element outdoor living builds vary based on scope. Got Yard provides 100% free, itemized in-person quotes!"
+  },
+  {
+    question: "Can you combine a patio build with a composite deck or covered pergola?",
+    answer: "Yes! Multi-level outdoor living builds combining a stone paver patio ground floor with a elevated composite deck, outdoor fireplace, or timber pergola are one of our core specialties. We design seamless transitions between your home back door, deck, and patio area."
+  },
+  {
+    question: "How do you prevent patio settlement and drainage issues in wet Washington weather?",
+    answer: "Every Got Yard patio build is engineered over a heavy-duty 6-inch compacted crushed gravel base with geotextile soil stabilization. We install integrated French drain systems, catch basins, and pitch the patio surface to channel heavy Northwest rainwater safely away from your home foundation."
+  },
+  {
+    question: "How long does a full patio build project take from start to finish?",
+    answer: "Most custom patio builds take 3 to 7 business days from site excavation to final polymeric joint sealing and site clean-up. Larger multi-element builds featuring pergolas, retaining walls, or outdoor kitchens typically range from 1 to 2 weeks."
+  }
+];
+
+const patioSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Custom Dream Patio Builds & Outdoor Living Spaces",
+  "serviceType": "Patio Construction & Hardscaping",
+  "provider": {
+    "@type": "LandscapingAndGardeningService",
+    "name": "Got Yard? Landscape Construction",
+    "telephone": "+14256961427",
+    "image": "https://gotyardlandscape.com/assets/logo-light.webp"
+  },
+  "areaServed": {
+    "@type": "AdministrativeArea",
+    "name": "Snohomish County, WA"
+  },
+  "description": "Custom dream patio builds in Marysville & Snohomish County, WA. Interlocking stone patios, covered outdoor living, fire pits, pergolas, seating walls, and composite deck combos."
+};
+---
+
+<Layout
+  title="Custom Dream Patio Builds & Outdoor Living Spaces | Got Yard?"
+  description="Turn your yard into a beautiful dream patio build in Marysville & Snohomish County, WA. Custom stone patios, covered pergolas, fire pits, seat walls & free quotes!"
+>
+  <script type="application/ld+json" set:html={JSON.stringify(patioSchema)} />
+
+  <Header />
+
+  <!-- Hero Section -->
+  <section class="lp-hero">
+    <div class="container">
+      <div class="lp-hero-grid">
+        
+        <!-- Left Column: Headline & Value Proposition -->
+        <div class="lp-hero-text">
+          <span class="service-badge-tag">Serving Marysville, Everett, Lake Stevens & Snohomish County</span>
+
+          <h1 class="lp-hero-heading">
+            Turn Your Yard Into A <span class="text-highlight">Beautiful Dream Patio Build</span>
+          </h1>
+
+          <p class="lp-hero-sub">
+            From custom interlocking stone patios and natural flagstone to covered outdoor living rooms, fire pits, and integrated composite deck builds. Engineered over a 6-inch zero-settling gravel base built to withstand Pacific Northwest winters.
+          </p>
+
+          <ul class="lp-trust-bullets">
+            <li><span class="bullet-icon">✓</span> <strong>Custom Stone Patios, Covered Outdoor Living & Fire Pits</strong></li>
+            <li><span class="bullet-icon">✓</span> <strong>6-Inch Zero-Settling Base & Heavy Drainage Guarantee</strong></li>
+            <li><span class="bullet-icon">✓</span> <strong>100% Free On-Site Consultation & 3D Design Walkthrough</strong></li>
+            <li><span class="bullet-icon">✓</span> <strong>Licensed, Bonded & Insured (GOTYA**801L3)</strong></li>
+          </ul>
+
+          <div class="lp-hero-ctas">
+            <a href="tel:4256961427" class="btn btn-gold btn-lg">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.27c1.21.49 2.53.76 3.88.76a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.27 2.67.76 3.88a1 1 0 01-.27 1.11l-2.37 2.4z"/></svg>
+              Click To Call (425) 696-1427
+            </a>
+          </div>
+
+          <!-- Proof Badges Strip -->
+          <div class="lp-proof-strip">
+            <div class="proof-item">
+              <span class="stars">★★★★★</span>
+              <span class="proof-label">5.0 Rating on Google</span>
+            </div>
+            <div class="proof-divider">|</div>
+            <div class="proof-item">
+              <span class="proof-bold">10-Year</span>
+              <span class="proof-label">Structural Warranty</span>
+            </div>
+            <div class="proof-divider">|</div>
+            <div class="proof-item">
+              <span class="proof-bold">100% Free</span>
+              <span class="proof-label">In-Person Quote</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Above-The-Fold Lead Capture Form -->
+        <div class="lp-hero-form-wrapper">
+          <QuoteForm 
+            title="Get A Free No Pressure In-Person Quote"
+            subtitle="Response guaranteed within 2-4 hours. Fast, itemized quote!"
+            buttonText="Get Free Patio Quote"
+          />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 Dream Patio Build Options Showcase Grid -->
+  <section class="lp-showcase-section">
+    <div class="container">
+      <div class="section-center-head">
+        <span class="section-eyebrow">Endless Possibilities</span>
+        <h2 class="section-title">Dream Patio Build Options & Features</h2>
+        <p class="section-desc">We bring your vision to life with custom outdoor living builds tailored to your lifestyle, yard layout, and budget.</p>
+      </div>
+
+      <div class="showcase-grid-6">
+        <div class="showcase-card">
+          <div class="showcase-img-wrap">
+            <img src="/assets/paver-patio-construction.webp" alt="Custom Interlocking Stone Paver Patio" />
+          </div>
+          <div class="showcase-body">
+            <h3>Interlocking Stone Patios</h3>
+            <p>Modern slate, charcoal, and natural stone paver patterns engineered with 8,000+ PSI compressive strength for foot traffic, furniture, and heavy grills.</p>
+          </div>
+        </div>
+
+        <div class="showcase-card">
+          <div class="showcase-img-wrap">
+            <img src="/assets/covered-deck-pergola.webp" alt="Covered Patio and Timber Pergola Build" />
+          </div>
+          <div class="showcase-body">
+            <h3>Covered Patios & Pergolas</h3>
+            <p>Extend your outdoor living season year-round with cedar pergolas, covered roof structures, and protected outdoor living rooms designed for rain or shine.</p>
+          </div>
+        </div>
+
+        <div class="showcase-card">
+          <div class="showcase-img-wrap">
+            <img src="/assets/fireplace-patio.webp" alt="Patio with Built-In Fire Pit and Outdoor Fireplace" />
+          </div>
+          <div class="showcase-body">
+            <h3>Fire Pits & Outdoor Fireplaces</h3>
+            <p>Gather around a custom stone fire pit, built-in gas fire table, or outdoor stone fireplace built directly into your patio footprint.</p>
+          </div>
+        </div>
+
+        <div class="showcase-card">
+          <div class="showcase-img-wrap">
+            <img src="/assets/composite-deck-building.webp" alt="Patio and Composite Deck Combination Build" />
+          </div>
+          <div class="showcase-body">
+            <h3>Patio & Deck Combo Builds</h3>
+            <p>Seamlessly transition from a custom elevated composite deck down to a spacious ground-level stone patio for multi-level outdoor entertainment.</p>
+          </div>
+        </div>
+
+        <div class="showcase-card">
+          <div class="showcase-img-wrap">
+            <img src="/assets/paver-patio-seating.webp" alt="Patio Seating Walls and Terraced Retaining Walls" />
+          </div>
+          <div class="showcase-body">
+            <h3>Seating Walls & Steps</h3>
+            <p>Integrated block seating walls, curved patio borders, and terraced stone steps that eliminate the need for extra patio furniture.</p>
+          </div>
+        </div>
+
+        <div class="showcase-card">
+          <div class="showcase-img-wrap">
+            <img src="/assets/softscape-lighting-design.webp" alt="Patio Softscape Accents and Outdoor Lighting" />
+          </div>
+          <div class="showcase-body">
+            <h3>Outdoor Lighting & Softscapes</h3>
+            <p>Low-voltage LED step lights, paver border lighting, and lush plant bedding that illuminate your patio build after sunset.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Got Yard Section -->
+  <section class="lp-why-section">
+    <div class="container">
+      <div class="section-center-head">
+        <span class="section-eyebrow">The Got Yard Difference</span>
+        <h2 class="section-title">Why Homeowners Trust Us For Patio Builds</h2>
+        <p class="section-desc">Built right the first time with premium materials and heavy excavation engineering.</p>
+      </div>
+
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon">🏗️</div>
+          <h3>6-Inch Compacted Gravel Base</h3>
+          <p>We excavate deep and compact a 6-inch commercial crushed stone base to guarantee zero settling or sagging over time.</p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-icon">📐</div>
+          <h3>3D Digital Design Walkthroughs</h3>
+          <p>See your dream patio build in detailed 3D before a single shovel touches your lawn so you get exactly what you envision.</p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-icon">🌧️</div>
+          <h3>Integrated French Drainage</h3>
+          <p>Proper surface sloping, catch basins, and subsurface French drains prevent standing rainwater from flooding your patio or yard.</p>
+        </div>
+
+        <div class="why-card">
+          <div class="why-icon">🤝</div>
+          <h3>Turnkey Single-Contractor Service</h3>
+          <p>From initial grading and stone pavers to woodwork, seating walls, and lighting — we handle every aspect under one roof.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Steps -->
+  <Process />
+
+  <!-- Testimonials & Reviews -->
+  <Reviews />
+
+  <!-- FAQ Section -->
+  <FaqAccordion 
+    cityName="Snohomish County" 
+    state="WA" 
+    title="Dream Patio Build FAQs in Snohomish County, WA" 
+    faqs={patioBuildFaqs} 
+  />
+
+  <!-- Bottom High-Converting CTA Banner -->
+  <section class="lp-cta-banner">
+    <div class="container">
+      <div class="cta-banner-card">
+        <h2>Ready To Build Your Dream Patio Outdoor Living Space?</h2>
+        <p>Get a 100% free on-site consultation and itemized estimate from Got Yard? Landscape Construction.</p>
+        <div class="cta-banner-actions">
+          <a href="tel:4256961427" class="btn btn-gold btn-lg">Call (425) 696-1427 Now</a>
+          <a href="#services" class="btn btn-outline-light js-open-quote-modal">Request Free Quote</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+
+  <!-- Sticky Mobile Action Bar -->
+  <div class="sticky-mobile-bar">
+    <a href="tel:4256961427" class="sticky-btn sticky-call">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.27c1.21.49 2.53.76 3.88.76a1 1 0 011 1V20a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.27 2.67.76 3.88a1 1 0 01-.27 1.11l-2.37 2.4z"/></svg>
+      Call (425) 696-1427
+    </a>
+    <button type="button" class="sticky-btn sticky-quote js-open-quote-modal">
+      Get Free Quote
+    </button>
+  </div>
+
+</Layout>
+
+<style>
+/* Landing Page Hero */
+.lp-hero {
+  padding-top: 130px;
+  padding-bottom: 70px;
+  background: linear-gradient(180deg, rgba(16, 19, 17, 0.88) 0%, rgba(16, 19, 17, 0.98) 100%),
+              url('/assets/hero-bg-hardscape-patio.webp') center/cover no-repeat;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.lp-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 44px;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .lp-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+}
+
+.service-badge-tag {
+  display: inline-block;
+  background: #89e44d;
+  border: 2px solid #000000;
+  box-shadow: 3px 4px 0px 0px #000000;
+  color: #000000;
+  padding: 8px 18px;
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.lp-hero-heading {
+  font-family: var(--font-heading);
+  font-size: 3.4rem;
+  font-weight: 700;
+  line-height: 1.06;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 18px;
+  letter-spacing: 0.5px;
+}
+
+.text-highlight {
+  color: var(--clr-accent-gold, #e5a93c);
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .lp-hero-heading {
+    font-size: 2.3rem;
+  }
+}
+
+.lp-hero-sub {
+  font-size: 1.08rem;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+
+.lp-trust-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 28px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.lp-trust-bullets li {
+  font-size: 1.02rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bullet-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: #89e44d;
+  color: #000000;
+  border-radius: 50%;
+  font-weight: 900;
+  font-size: 0.8rem;
+}
+
+.lp-hero-ctas {
+  margin-bottom: 28px;
+}
+
+.btn-lg {
+  padding: 16px 28px;
+  font-size: 1.15rem;
+}
+
+.lp-proof-strip {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  flex-wrap: wrap;
+}
+
+.proof-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stars {
+  color: #ffc107;
+  font-size: 1rem;
+}
+
+.proof-bold {
+  font-weight: 800;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.proof-label {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.proof-divider {
+  color: rgba(255, 255, 255, 0.25);
+  font-size: 1.2rem;
+}
+
+/* Showcase Section */
+.lp-showcase-section {
+  padding: 90px 0;
+  background-color: var(--clr-bg-dark);
+}
+
+.section-center-head {
+  text-align: center;
+  max-width: 780px;
+  margin: 0 auto 48px auto;
+}
+
+.showcase-grid-6 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+@media (max-width: 992px) {
+  .showcase-grid-6 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .showcase-grid-6 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.showcase-card {
+  background: var(--clr-bg-card);
+  border: 2.5px solid #000000;
+  box-shadow: 4px 6px 0px 0px #000000;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.showcase-img-wrap {
+  height: 220px;
+  overflow: hidden;
+}
+
+.showcase-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.showcase-body {
+  padding: 24px;
+}
+
+.showcase-body h3 {
+  font-family: var(--font-heading);
+  font-size: 1.35rem;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+}
+
+.showcase-body p {
+  font-size: 0.95rem;
+  color: var(--clr-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Why Section */
+.lp-why-section {
+  padding: 90px 0;
+  background-color: var(--clr-bg-main);
+  border-top: 1px solid var(--clr-border);
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 992px) {
+  .why-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .why-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.why-card {
+  background: var(--clr-bg-card);
+  border: 2px solid #000000;
+  box-shadow: 3px 4px 0px 0px #000000;
+  border-radius: 12px;
+  padding: 28px 20px;
+  text-align: center;
+}
+
+.why-icon {
+  font-size: 2.5rem;
+  margin-bottom: 14px;
+}
+
+.why-card h3 {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.why-card p {
+  font-size: 0.92rem;
+  color: var(--clr-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* CTA Banner */
+.lp-cta-banner {
+  padding: 80px 0;
+  background-color: var(--clr-bg-dark);
+}
+
+.cta-banner-card {
+  background: linear-gradient(135deg, #1d2520 0%, #121713 100%);
+  border: 2.5px solid #000000;
+  box-shadow: 6px 8px 0px 0px #000000;
+  border-radius: 16px;
+  padding: 48px;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cta-banner-card h2 {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.cta-banner-card p {
+  font-size: 1.1rem;
+  color: var(--clr-text-muted);
+  margin-bottom: 28px;
+}
+
+.cta-banner-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* Sticky Mobile Action Bar */
+.sticky-mobile-bar {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  background: #111512;
+  border-top: 2px solid #000000;
+  padding: 10px 14px;
+  gap: 10px;
+  box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+  .sticky-mobile-bar {
+    display: flex;
+  }
+}
+
+.sticky-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 10px;
+  font-size: 0.95rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  border-radius: 8px;
+  text-decoration: none;
+  border: 1.5px solid #000000;
+}
+
+.sticky-call {
+  background: var(--clr-accent-gold);
+  color: #000000;
+}
+
+.sticky-quote {
+  background: #89e44d;
+  color: #000000;
+  cursor: pointer;
+}
+</style>
